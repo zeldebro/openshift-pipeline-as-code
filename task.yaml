@@ -1,0 +1,9 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: example-task
+spec:
+  steps:
+    - name: sparkctl-task
+      image: <your_sparkctl_image>
+      command: ["sparkctl", "your_command_here"]
