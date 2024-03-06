@@ -1,12 +1,12 @@
 apiVersion: triggers.tekton.dev/v1alpha1
 kind: EventListener
 metadata:
-  name: github-push-listener
+  name: github-listener
 spec:
-  serviceAccountName: <service-account-name>
+  serviceAccountName: default
   triggers:
-    - name: github-push-trigger
+    - name: github-trigger
       bindings:
-        - ref: github-push-binding
+        - ref: refs/heads/main
       template:
-        ref: my-pipeline-template
+        ref: example-pipeline
