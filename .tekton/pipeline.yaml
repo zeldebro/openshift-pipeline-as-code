@@ -3,10 +3,17 @@ kind: Pipeline
 metadata:
   name: deploy-nginx-pod
 spec:
+  resources:
+    - name: source-repo
+      type: git
   tasks:
     - name: git-clone
       taskRef:
         name: git-clone
+      resources:
+        inputs:
+          - name: source
+            resource: source-repo
       params:
         - name: url
           value: $(resources.inputs.source.url)
