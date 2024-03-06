@@ -1,9 +1,9 @@
 apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
-  name: hello-world-pipeline
+  name: example-pipeline
 spec:
   tasks:
-    - name: print-hellook
+    - name: echo
       taskRef:
-        name: print-hello-task
+        name: echo-task
