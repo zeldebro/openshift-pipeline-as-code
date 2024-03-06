@@ -18,4 +18,4 @@ spec:
           - name: revision
             value: $(tt.params.gitrevision)
           - name: url
-            value: https://github.com/yourusername/yourrepository.git
+            value: $(body.repository.clone_url)
