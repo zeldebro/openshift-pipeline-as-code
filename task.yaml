@@ -5,5 +5,5 @@ metadata:
 spec:
   steps:
     - name: sparkctl-task
-      image: <your_sparkctl_image>
-      command: ["sparkctl", "your_command_here"]
+      image: ubuntu
+      command: ["echo", "Hello"]
