@@ -1,11 +1,10 @@
 apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
-  name: print-hello-task
+  name: echo-task
 spec:
   steps:
-    - name: print-hello-step
-      image: busybox
-      script: |
-        #!/bin/sh
-        echo "Hello, world!"
+    - name: echo
+      image: alpine:latest
+      script:
+        - echo "This is a dummy task"
