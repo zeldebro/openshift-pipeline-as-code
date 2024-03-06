@@ -1,0 +1,17 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: deploy-nginx-pod
+spec:
+  tasks:
+    - name: git-clone
+      taskRef:
+        name: git-clone
+      params:
+        - name: url
+          value: $(resources.inputs.source.url)
+        - name: revision
+          value: $(resources.inputs.source.revision)
+    - name: deploy-pod
+      taskRef:
+        name: deploy-pod
