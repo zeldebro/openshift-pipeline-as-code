@@ -3,6 +3,7 @@ kind: EventListener
 metadata:
   name: github-push-listener
 spec:
+  serviceAccountName: <service-account-name>
   triggers:
     - name: github-push-trigger
       bindings:
