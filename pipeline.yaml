@@ -4,6 +4,6 @@ metadata:
   name: hello-world-pipeline
 spec:
   tasks:
-    - name: print-hello
+    - name: print-hellook
       taskRef:
         name: print-hello-task
