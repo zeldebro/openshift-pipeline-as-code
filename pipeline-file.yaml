@@ -2,6 +2,7 @@ apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
   name: example-pipeline
+  namespace: openshift-gitops
 spec:
   tasks:
     - name: task1
