@@ -11,7 +11,7 @@ spec:
   source:
     repoURL: https://github.com/zeldebro/openshift-pipeline-as-code.git
     targetRevision: main
-    path: .tekton
+    path: .
   syncPolicy:
     automated:
       prune: true
