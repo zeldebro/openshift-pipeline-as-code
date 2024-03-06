@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: your-application-name
+  namespace: argocd
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  project: default
+  source:
+    repoURL: https://github.com/zeldebro/openshift-pipeline-as-code.git
+    targetRevision: main
+    path: .tekton
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
