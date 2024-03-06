@@ -1,10 +1,9 @@
 apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
-  name: my-pipeline
+  name: hello-world-pipeline
 spec:
   tasks:
-    - name: build
-      # Define your build steps here
-    - name: deploy
-      # Define your deployment steps here
+    - name: print-hello
+      taskRef:
+        name: print-hello-task
