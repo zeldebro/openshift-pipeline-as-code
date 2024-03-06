@@ -1,0 +1,11 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: print-hello-task
+spec:
+  steps:
+    - name: print-hello-step
+      image: busybox
+      script: |
+        #!/bin/sh
+        echo "Hello, world!"
