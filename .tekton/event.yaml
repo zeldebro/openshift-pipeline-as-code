@@ -1,27 +1,15 @@
 apiVersion: triggers.tekton.dev/v1alpha1
 kind: EventListener
 metadata:
-  name: github-pr
+  name: github-listener
 spec:
-  serviceAccountName: tekton-triggers-example-sa
+  serviceAccountName: tekton-triggers-admin
   triggers:
-    - name: github-listener
+    - name: github-trigger
       interceptors:
-        - ref:
-            name: "github"
-          params:
-            - name: "secretRef"
-              value:
-                secretName: github-interceptor-secret
-                secretKey: secretToken
-            - name: "eventTypes"
-              value: ["pull_request"]
-        - ref:
-            name: "cel"
-          params:
-            - name: "filter"
-              value: "body.action in ['opened', 'synchronize', 'reopened']"
+        - cel:
+            filter: "body"
       bindings:
-        - ref: github-pr-binding
+        - name: github-binding
       template:
-        ref: github-pr-pipeline-template
+        ref: github-template
