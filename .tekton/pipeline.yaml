@@ -1,32 +1,14 @@
+# Tekton Pipeline for applying pod.yaml
 apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
-  name: github-pr-pipeline
+  name: apply-pod-pipeline
 spec:
-  resources:
-    - name: source
-      type: git
   tasks:
-    - name: test
+    - name: apply-pod-task
       taskRef:
-        name: test
+        name: kubectl-apply-task
       resources:
         inputs:
-          - name: source
-            resource: source
----
-apiVersion: tekton.dev/v1beta1
-kind: Task
-metadata:
-  name: test
-spec:
-  resources:
-    inputs:
-      - name: source
-        type: git
-  steps:
-    - name: run-test
-      image: golang:1.16.3-alpine3.13
-      workingDir: /workspace/source
-      command: ["go"]
-      args: ["test"]
+          - name: workspace
+            type: git
