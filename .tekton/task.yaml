@@ -1,14 +1,15 @@
-apiVersion: tekton.dev/v1
+apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
-  name: maven-build
+  name: test
 spec:
-  workspaces:
-   -name: filedrop
+  resources:
+    inputs:
+      - name: source
+        type: git
   steps:
-  - name: build
-    image: maven:3.6.0-jdk-8-slim
-    command:
-    - /usr/bin/mvn
-    args:
-    - install
+    - name: run-test
+      image: golang:1.16.3-alpine3.13
+      workingDir: /workspace/source
+      command: ["go"]
+      args: ["test"]
