@@ -1,24 +1,32 @@
 apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
-  name: deploy-nginx-pod
+  name: github-pr-pipeline
 spec:
   resources:
-    - name: source-repo
+    - name: source
       type: git
   tasks:
-    - name: git-clone
+    - name: test
       taskRef:
-        name: git-clone
+        name: test
       resources:
         inputs:
           - name: source
-            resource: source-repo
-      params:
-        - name: url
-          value: $(resources.inputs.source.url)
-        - name: revision
-          value: $(resources.inputs.source.revision)
-    - name: deploy-pod
-      taskRef:
-        name: deploy-pod
+            resource: source
+---
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: test
+spec:
+  resources:
+    inputs:
+      - name: source
+        type: git
+  steps:
+    - name: run-test
+      image: golang:1.16.3-alpine3.13
+      workingDir: /workspace/source
+      command: ["go"]
+      args: ["test"]
