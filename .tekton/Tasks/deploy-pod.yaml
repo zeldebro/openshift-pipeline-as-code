@@ -1,10 +1,14 @@
 apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
-  name: deploy-pod
+  name: kubectl-apply-task
 spec:
   steps:
-    - name: deploy-pod
-      image: quay.io/openshift/origin-cli
-      script: |
-        oc apply -f /workspace/source/pod.yaml
+    - name: apply-pod
+      image: bitnami/kubectl
+      command:
+        - kubectl
+      args:
+        - apply
+        - -f
+        - $(resources.inputs.artifacts.location)/pod.yaml
